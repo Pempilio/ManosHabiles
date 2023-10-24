@@ -34,6 +34,7 @@ namespace ManosHabilesProf
                 lector.Read();
                 clave = lector.GetInt32(0);
                 nombre = lector.GetString(1);
+     
 
                 Session.Timeout = 10;
                 Session.Add("cProf", clave);
