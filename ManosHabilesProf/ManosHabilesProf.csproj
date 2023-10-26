@@ -69,9 +69,12 @@
   <ItemGroup>
     <Content Include="Anuncio.aspx" />
     <Content Include="Buzon.aspx" />
+    <Content Include="Cliente.aspx" />
     <Content Include="crearCuenta.aspx" />
     <Content Include="HomeProfesionista.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="misAnuncios.aspx" />
+    <Content Include="nuevoAnuncio.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
@@ -90,6 +93,13 @@
     </Compile>
     <Compile Include="Buzon.aspx.designer.cs">
       <DependentUpon>Buzon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente.aspx.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente.aspx.designer.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="crearCuenta.aspx.cs">
@@ -112,6 +122,20 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="misAnuncios.aspx.cs">
+      <DependentUpon>misAnuncios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="misAnuncios.aspx.designer.cs">
+      <DependentUpon>misAnuncios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nuevoAnuncio.aspx.cs">
+      <DependentUpon>nuevoAnuncio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nuevoAnuncio.aspx.designer.cs">
+      <DependentUpon>nuevoAnuncio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

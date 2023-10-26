@@ -20,14 +20,17 @@ namespace ManosHabilesProf
             //Correo -> TextBox1
             //Passwrd -> TextBox2
             String query = "select cProf,nombre,codigoPost from Profesionista where correo=? and passwrd=?";
+            String queryCliente = "select cCliente,nombre,codigoPost from Cliente where correo=? and passwrd=?";
             String nombre;
             int clave, CP;
 
             OdbcConnection conexion = new ConexionBD().con;
-            OdbcCommand comando = new OdbcCommand(query, conexion);
+            OdbcCommand comando;
+            comando = new OdbcCommand(query, conexion);
             comando.Parameters.AddWithValue("correo", TextBox1.Text);
             comando.Parameters.AddWithValue("passwrd", TextBox2.Text);
             OdbcDataReader lector = comando.ExecuteReader();
+            OdbcDataReader lector2;
 
             if (lector.HasRows)
             {
@@ -45,9 +48,32 @@ namespace ManosHabilesProf
             }
             else
             {
-                Label1.Text = "Correo o contraseña incorrectos";
-                Session.Clear();
-                Session.Abandon();
+                lector.Close();
+                comando = new OdbcCommand(queryCliente, conexion);
+                comando.Parameters.AddWithValue("correo", TextBox1.Text);
+                comando.Parameters.AddWithValue("passwrd", TextBox2.Text);
+                lector2 = comando.ExecuteReader();
+
+                if (lector2.HasRows)
+                {
+                    lector2.Read();
+                    clave = lector2.GetInt32(0);
+                    nombre = lector2.GetString(1);
+                    CP = lector2.GetInt32(2);
+
+                    Session.Timeout = 10;
+                    Session.Add("cCliente", clave);
+                    Session.Add("nombre", nombre);
+                    Session.Add("codigoPostal", CP);
+
+                    Response.Redirect("Cliente.aspx");
+                }
+                else
+                {
+                    Label1.Text = "Correo o contraseña incorrectos";
+                    Session.Clear();
+                    Session.Abandon();
+                }
             }
             lector.Close();
         }
