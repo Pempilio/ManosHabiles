@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Alta admin</title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            Nueva Cuenta Administrativa<br />
+            <h2>Alta nuevo admin</h2>
             <br />
             Nombre:<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <br />
@@ -18,10 +18,10 @@
             <br />
             Correo:<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
             <br />
-            Contraseña:<asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            Contraseña:<asp:TextBox ID="TextBox4" runat="server" TextMode="Password"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="Button1" runat="server" Text="Crear Cuenta" />
+            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Crear cuenta" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server"></asp:Label>

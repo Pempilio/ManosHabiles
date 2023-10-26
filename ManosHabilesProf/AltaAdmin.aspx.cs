@@ -6,7 +6,6 @@ using System.Reflection.Emit;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.Odbc;
 
 namespace ManosHabilesProf
 {
@@ -18,43 +17,35 @@ namespace ManosHabilesProf
                  Response.Redirect("LoginAdmin.aspx");
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
- 
-            String query = "insert into Administrador values (?,?,?,?,?)";
-            //Query para calcular la llave primaria
-            //Este query no necesita parametros
-            String queryCAdmin = "select max(cAdmin) from Administrador";
-            int llavePrimaria;
 
-            //Declarar e instanciar la conexion
-            //De forma abreviada, ver login para forma completa
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MenuAdmin.aspx");
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            String nombre, apellido, correo, contrasena;
+            nombre = TextBox1.Text;
+            apellido = TextBox2.Text;
+            correo = TextBox3.Text;
+            contrasena = TextBox4.Text;
+
+            if(string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(correo) || string.IsNullOrEmpty(contrasena))
+            {
+                Label1.Text = "Complete todos los campos";
+                return;
+            }
+            String query = "insert into Administrador values((select isnull(max(cAdmin),0)+1 from Administrador),?,?,?,?)";
             OdbcConnection conexion = new ConexionBD().con;
 
-            //Crear el comando de la llave primaria
-            OdbcCommand comando = new OdbcCommand(queryCAdmin, conexion);
-            OdbcDataReader lector = comando.ExecuteReader();
-            lector.Read();
-            try
-            {
-                llavePrimaria = lector.GetInt32(0) + 1;
-            }
-            catch (Exception ex)
-            {
-                Label1.Text = "Hay un problema, llamar al equipo de soporte tecnico";
-                llavePrimaria = -1;
-            }
-            //Crear el comando de la llave primaria
-
-            //Crear el usuario nuevo con los parametros del usuario
-            //y la llave primaria
-            comando = new OdbcCommand(query, conexion);
+            OdbcCommand comando = new OdbcCommand(query, conexion);
             //Configurar los parametros en el orden adecuado al comando
-            comando.Parameters.AddWithValue("cAdmin", llavePrimaria);
-            comando.Parameters.AddWithValue("nombre", TextBox1.Text);
-            comando.Parameters.AddWithValue("apellido", TextBox2.Text);
-            comando.Parameters.AddWithValue("correo", TextBox2.Text);
-            comando.Parameters.AddWithValue("passwrd", TextBox3.Text);
+            comando.Parameters.AddWithValue("nombre", nombre);
+            comando.Parameters.AddWithValue("apellido", apellido);
+            comando.Parameters.AddWithValue("correo", correo);
+            comando.Parameters.AddWithValue("passwrd", contrasena);
+
             try
             {
                 //ExecuteNonQuery porque es un insert y no regresa
@@ -65,6 +56,7 @@ namespace ManosHabilesProf
                 TextBox1.Text = "";
                 TextBox2.Text = "";
                 TextBox3.Text = "";
+                TextBox4.Text = "";
             }
             catch (Exception ex)
             {
@@ -72,11 +64,6 @@ namespace ManosHabilesProf
                 Label1.Text = ex.ToString();
             }
             conexion.Close();
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MenuAdmin.aspx");
         }
     }
 }

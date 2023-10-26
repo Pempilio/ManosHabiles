@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Cliente</title>
 </head>
 <body>
     
@@ -15,7 +15,7 @@
             <h1>Profesionistas</h1>
             <p>
                 <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Mis anuncios" />
-                <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" />
+                <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" OnClick="Button4_Click" />
             </p>
 
             <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">

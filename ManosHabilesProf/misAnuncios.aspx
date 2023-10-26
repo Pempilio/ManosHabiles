@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>Mis anuncios</title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Regresar" />
-            <asp:Button ID="Button3" runat="server" Text="Cerrar sesión" />
+            <asp:Button ID="Button3" runat="server" Text="Cerrar sesión" OnClick="Button3_Click1" />
             <br />
             <br />
             MIS ANUNCIOS:<br />

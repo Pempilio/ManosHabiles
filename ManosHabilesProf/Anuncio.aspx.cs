@@ -18,7 +18,7 @@ namespace ManosHabilesProf
             }
             //CAnuncio -> Session[cAnuncio]
             String query = "select Cliente.nombre,Cliente.codigoPost,Anuncio.semanas,Anuncio.monto,Anuncio.diasDescanso, " +
-                " Anuncio.edad,Anuncio.horaEntrada,Anuncio.horaSalida,Anuncio.fechaInicio,Anuncio.descripcion " +
+                " Anuncio.edad,substring(concat(Anuncio.horaEntrada, ''), 0, 9) as 'Hora entrada',substring(concat(Anuncio.horaSalida, ''), 0, 9) as 'Hora salida',Anuncio.fechaInicio,Anuncio.descripcion " +
                 " from Anuncio inner join Cliente on Anuncio.cCliente=Cliente.cCliente " +
                 " where Anuncio.cAnuncio = ?";
             OdbcConnection conexion = new ConexionBD().con;

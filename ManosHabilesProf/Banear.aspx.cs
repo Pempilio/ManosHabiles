@@ -18,8 +18,8 @@ namespace ManosHabilesProf
 
             //revisar si si hay una session abiernta
 
-             // if (Session["nombreA"] == null || Session["claveA"] == null)
-                // Response.Redirect("LoginAdmin.aspx");
+             if (Session["nombreA"] == null || Session["claveA"] == null)
+                 Response.Redirect("LoginAdmin.aspx");
 
 
 
@@ -240,6 +240,11 @@ namespace ManosHabilesProf
         {
             Session.Abandon();
             Response.Redirect("LoginAdmin.aspx");
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

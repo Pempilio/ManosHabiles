@@ -39,7 +39,7 @@ namespace ManosHabilesProf
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AltaAdmin.apsx");
+            Response.Redirect("AltaAdmin.aspx");
         }
     }
 }

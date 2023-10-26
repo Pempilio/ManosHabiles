@@ -15,6 +15,10 @@ namespace ManosHabilesProf
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["cCliente"] == null || Session["nombre"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
             if (DropDownList1.Items.Count == 0)
             {
                 String query = "select cEspe,nombre from Especialidad";
@@ -56,6 +60,14 @@ namespace ManosHabilesProf
             {   // el nonQuery se hace cuando no te regresa nada
                 comando.ExecuteNonQuery();
                 Label1.Text = "Tu anuncio: " + TextBox9.Text + "ha sido publicado exitosamente.";
+                TextBox2.Text = "";
+                TextBox3.Text = "";
+                TextBox4.Text = "";
+                TextBox6.Text = "";
+                TextBox7.Text = "";
+                TextBox8.Text = "";
+                TextBox9.Text = "";
+                TextBox10.Text = "";
 
             }
             catch (Exception ex)
@@ -65,5 +77,10 @@ namespace ManosHabilesProf
 
         }
 
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

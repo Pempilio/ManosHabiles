@@ -52,7 +52,7 @@ namespace ManosHabilesProf
             int claveEspe;
 
             String query = "select Cliente.cCliente as 'Num',Cliente.nombre as 'Nombre',Anuncio.descripcion as 'Descripción', " +
-                " Cliente.codigoPost as 'CP',Anuncio.monto as 'Sueldo',Sexo.nombre as 'Sexo' from Anuncio " +
+                " Cliente.codigoPost as 'CP',Anuncio.monto as 'Sueldo',Sexo.nombre as 'Sexo',Anuncio.cAnuncio as 'Folio del anuncio' from Anuncio " +
                 " inner join Cliente on Cliente.cCliente=Anuncio.cCliente" +
                 " inner join Sexo on Cliente.cSexo=Sexo.cSexo " +
                 " where Anuncio.cEspe=? and Cliente.estatus <> 1 order by Anuncio.monto desc";
@@ -89,7 +89,7 @@ namespace ManosHabilesProf
         protected void Button1_Click(object sender, EventArgs e)
         {
             String select = "select Cliente.cCliente as 'Num',Cliente.nombre as 'Nombre',Anuncio.descripcion as 'Descripción',Cliente.codigoPost as 'CP', " +
-                " Anuncio.monto as 'Sueldo',Sexo.nombre as 'Sexo' from Anuncio inner join Cliente on Cliente.cCliente=Anuncio.cCliente " +
+                " Anuncio.monto as 'Sueldo',Sexo.nombre as 'Sexo', Anuncio.cAnuncio as 'Folio del anuncio' from Anuncio inner join Cliente on Cliente.cCliente=Anuncio.cCliente " +
                 " inner join Sexo on Cliente.cSexo=Sexo.cSexo ";
             String where = " where Anuncio.cEspe=? ";
             String ordena = " order by Anuncio.monto desc";
@@ -163,7 +163,7 @@ namespace ManosHabilesProf
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session.Add("cAnuncio", GridView1.Rows[GridView1.SelectedIndex].Cells[1].Text);
+            Session.Add("cAnuncio", GridView1.Rows[GridView1.SelectedIndex].Cells[7].Text);
             Response.Redirect("Anuncio.aspx");
         }
 

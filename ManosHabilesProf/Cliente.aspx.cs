@@ -13,6 +13,10 @@ namespace ManosHabilesProf
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["cCliente"] == null || Session["nombre"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
             if (DropDownList1.Items.Count == 0)
             {
                 String query = "select cEspe,nombre from Especialidad";
@@ -43,7 +47,12 @@ namespace ManosHabilesProf
 
         protected void CargarGridView()
         {
-            String query = "select\r\n    Profesionista.nombre as Nombre,\r\n    Profesionista.apellido as Apellido,\r\n    Profesionista.correo as Correo,\r\n    Sexo.nombre as 'Sexo',\r\n    Profesionista.anosExp as 'Años de experiencia',\r\n    datediff(year, Profesionista.fechaNaci, getdate()) as 'Edad',\r\n    Especialidad.nombre as 'Especialidad'\r\nfrom\r\n    Profesionista\r\ninner join Sexo on Profesionista.sexo = Sexo.sexo\r\ninner join Especialidad on Profesionista.cEspe = Especialidad.cEspe\r\nwhere\r\n    Profesionista.estatus = 1\r\norder by\r\n    Especialidad.nombre desc;\r\n ";
+            String query = "select Profesionista.nombre as Nombre, Profesionista.apellido as Apellido, " +
+                " Profesionista.correo as Correo, Sexo.nombre as 'Sexo', Profesionista.anosExp as 'Años de experiencia', " +
+                " datediff(year, Profesionista.fechaNaci, getdate()) as 'Edad', Especialidad.nombre as 'Especialidad' " +
+                " from Profesionista inner join Sexo on Profesionista.cSexo = Sexo.cSexo " +
+                " inner join Especialidad on Profesionista.cEspe = Especialidad.cEspe " +
+                " where Profesionista.estatus = 0 order by Especialidad.nombre desc";
 
             OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando = new OdbcCommand(query, conexion);
@@ -77,9 +86,9 @@ namespace ManosHabilesProf
                 "Profesionista.anosExp as 'Años de experiencia', DATEDIFF(year, Profesionista.fechaNaci, GETDATE()) as 'Edad', " +
                 "Especialidad.nombre as 'Especialidad' " +
                 "FROM Profesionista " +
-                "INNER JOIN Sexo ON Profesionista.sexo = Sexo.sexo " +
+                "INNER JOIN Sexo ON Profesionista.cSexo = Sexo.cSexo " +
                 "INNER JOIN Especialidad ON Profesionista.cEspe = Especialidad.cEspe " +
-                "WHERE Profesionista.estatus = 1";
+                "WHERE Profesionista.estatus = 0";
 
             if (!string.IsNullOrEmpty(especialidad))
             {
@@ -147,6 +156,12 @@ namespace ManosHabilesProf
         protected void Button3_Click(object sender, EventArgs e)
         {
             Response.Redirect("misAnuncios.aspx");
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
         }
     }
 }
