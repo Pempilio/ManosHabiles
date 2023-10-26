@@ -12,6 +12,10 @@ namespace ManosHabilesProf
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["cProf"] == null || Session["nombre"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
             //cProf -> Session[cProf]
             String claveEsp = "select Profesionista.cEspe from Profesionista where Profesionista.cProf = ?";
             int cEspe;
@@ -23,7 +27,7 @@ namespace ManosHabilesProf
                 " ,Anuncio.cAnuncio as 'Num' from Notificaciones inner join Asunto on Asunto.cAsunto=Notificaciones.cAsunto " +
                 " inner join Cliente on Cliente.cCliente=Notificaciones.cCliente " +
                 " inner join Anuncio on Anuncio.cCliente=Cliente.cCliente " +
-                " where Notificaciones.cProf = ? and Asunto.cAsunto = 1 and Anuncio.cEspe = ?";
+                " where Notificaciones.cProf = ? and Asunto.cAsunto = 1 and Anuncio.cEspe = ? and Cliente.estatus <> 1";
 
             OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando;

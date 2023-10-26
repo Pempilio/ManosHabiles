@@ -55,7 +55,7 @@ namespace ManosHabilesProf
                 " Cliente.codigoPost as 'CP',Anuncio.monto as 'Sueldo',Sexo.nombre as 'Sexo' from Anuncio " +
                 " inner join Cliente on Cliente.cCliente=Anuncio.cCliente" +
                 " inner join Sexo on Cliente.cSexo=Sexo.cSexo " +
-                " where Anuncio.cEspe=? order by Anuncio.monto desc";
+                " where Anuncio.cEspe=? and Cliente.estatus <> 1 order by Anuncio.monto desc";
 
             OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando = new OdbcCommand(queryEspe, conexion);
