@@ -70,7 +70,7 @@ namespace ManosHabilesProf
                     estatus = lector2.GetInt32(3);
                     if (estatus == 0)
                     {
-                        Session.Timeout = 10;
+                        Session.Timeout = 30;
                         Session.Add("cCliente", clave);
                         Session.Add("nombre", nombre);
                         Session.Add("codigoPostal", CP);

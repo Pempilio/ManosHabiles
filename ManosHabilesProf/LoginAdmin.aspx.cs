@@ -58,7 +58,7 @@ namespace ManosHabilesProf
 
                 //Timeout de la sesion, se cierra automáticamente
                 //es en minutos
-                Session.Timeout = 10;
+                Session.Timeout = 30;
                 //Guardar el nombre y la clave del cliente en
                 //variables de sesión
                 Session.Add("nombreA", nombreAdmin);
