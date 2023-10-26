@@ -75,5 +75,11 @@ namespace ManosHabilesProf
         {
             Response.Redirect("HomeProfesionista.aspx");
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

@@ -91,5 +91,11 @@ namespace ManosHabilesProf
         {
             Response.Redirect("Buzon.aspx");
         }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

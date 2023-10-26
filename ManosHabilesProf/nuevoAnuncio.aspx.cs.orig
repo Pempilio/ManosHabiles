@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.Odbc;
+using ManosHabilesProf;
+
+namespace ManosHabilesProf
+{
+    public partial class nuevoAnuncio : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (DropDownList1.Items.Count == 0)
+            {
+                String query = "select cEspe,nombre from Especialidad";
+                OdbcConnection conexion = new ConexionBD().con;
+                OdbcCommand comando = new OdbcCommand(query, conexion);
+                OdbcDataReader lector = comando.ExecuteReader();
+                DropDownList1.DataSource = lector;
+                DropDownList1.DataTextField = "nombre";
+                DropDownList1.DataValueField = "cEspe";
+                DropDownList1.DataBind();
+                conexion.Close();
+            }
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Cliente.aspx");
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            String query = "insert into Anuncio values ((select ISNULL(MAX(cAnuncio),0)+1 from Anuncio),?,?,?,?,?,?,?,?,?,?,?,?)";
+            OdbcConnection conexion = new ConexionBD().con;
+            OdbcCommand comando = new OdbcCommand(query, conexion);
+            comando.Parameters.AddWithValue("semanas", TextBox2.Text);
+            comando.Parameters.AddWithValue("monto", TextBox3.Text);
+            comando.Parameters.AddWithValue("diasDescanso", TextBox4.Text);
+            comando.Parameters.AddWithValue("estancia", DropDownList2.SelectedValue);
+            comando.Parameters.AddWithValue("edad", TextBox10.Text);
+            comando.Parameters.AddWithValue("descripcion", TextBox9.Text);
+            comando.Parameters.AddWithValue("horaEntrada", TextBox6.Text);
+            comando.Parameters.AddWithValue("horaSalida", TextBox7.Text);
+            comando.Parameters.AddWithValue("fechaInicio", TextBox8.Text);
+            comando.Parameters.AddWithValue("cEspe", DropDownList1.SelectedValue);
+            comando.Parameters.AddWithValue("visibilidad", 1);
+            comando.Parameters.AddWithValue("cCliente", Session["cCliente"]);
+            try
+            {   // el nonQuery se hace cuando no te regresa nada
+                comando.ExecuteNonQuery();
+                Label1.Text = "Tu anuncio: " + TextBox9.Text + "ha sido publicado exitosamente.";
+
+            }
+            catch (Exception ex)
+            {
+                Label1.Text = "Error" + ex.ToString();
+            }
+
+        }
+
+<<<<<<< HEAD
+=======
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
+>>>>>>> 3727c79c832f9d84fa856e5e5bde5fdc8da3e339
+    }
+}

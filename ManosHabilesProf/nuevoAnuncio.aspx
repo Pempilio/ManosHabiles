@@ -14,6 +14,9 @@
             ¡Crea un nuevo anuncio!
 
             <br />
+            <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Cerrar sesión" />
+
+            <br />
             <hr />
 &nbsp;Categoria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Semanas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Monto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dias de descanso&nbsp;&nbsp; Estancia&nbsp;&nbsp;&nbsp;
             <br />
