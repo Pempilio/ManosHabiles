@@ -20,6 +20,8 @@
                 <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Ir al buzón" />
 &nbsp;&nbsp;
             <asp:Button ID="Button1" runat="server" Text="Volver al menú" OnClick="Button1_Click" />
+            &nbsp;
+                <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Cerrar sesión" />
             </p>
             <br />
             Nombre del cliente:

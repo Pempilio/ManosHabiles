@@ -14,7 +14,8 @@
              <h1>Profesionistas</h1>
              <p>
                  <asp:Button ID="Button3" runat="server" Text="Mis anuncios" />
-                 <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" />
+                 &nbsp;&nbsp;&nbsp;
+                 <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" OnClick="Button4_Click" />
              </p>
 
              <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">

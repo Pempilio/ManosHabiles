@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
          <div>
             <asp:Button ID="Button1" runat="server" Text="Regresar" />
-            <asp:Button ID="Button3" runat="server" Text="Cerrar sesión" />
+            <asp:Button ID="Button3" runat="server" Text="Cerrar sesión" OnClick="Button3_Click" />
             <br />
             <br />
             MIS ANUNCIOS:<br />

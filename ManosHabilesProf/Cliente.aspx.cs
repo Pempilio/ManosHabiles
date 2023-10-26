@@ -108,5 +108,11 @@ namespace ManosHabilesProf
             GridView1.DataSource = lector;
             GridView1.DataBind();
         }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("login.aspx");
+        }
     }
 }

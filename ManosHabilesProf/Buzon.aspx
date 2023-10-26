@@ -13,6 +13,8 @@
             <h2>Buzón de notificaciones</h2>
             <p>
                 <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Regresar al menú" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cerra sesión" />
             </p>
             <p>
                 <asp:Label ID="Label1" runat="server"></asp:Label>
