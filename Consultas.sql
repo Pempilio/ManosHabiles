@@ -72,3 +72,36 @@ select nombre,apellido,correo,passwrd,codigoPost,descripcion from Profesionista 
 update Profesionista set nombre = 'Emilio', apellido='Medina',correo='emilio@gmail.com',passwrd='emiliopwd',codigoPost='14250',descripcion='me gusta el mamey' where Profesionista.cProf=1
 
 select * from Profesionista
+
+select * from Anuncio
+
+select * from Cliente
+select cCliente,nombre,codigoPost from Cliente where correo='felipe@gmail.com' and passwrd='felipepwd'
+
+select * from Administrador
+insert into Administrador values(1,'Demay','Perez','demay@gmail.com','demaypwd')
+
+INSERT INTO Motivo VALUES (1, 'Agresion');
+INSERT INTO Motivo VALUES (2, 'Robo');
+INSERT INTO Motivo VALUES (3, 'Maltrato');
+
+select * from Cliente
+
+INSERT INTO Cliente VALUES (2, 'Juan', 'Pérez', 12345, 'juan.perez@email.com', 'password123', '1995-10-25', 0, 'Cliente regular', 1);
+
+select * from Reporte
+INSERT INTO Reporte VALUES(2,'2023-10-26' ,'me golpeó.', 3);
+
+select * from genera
+INSERT INTO genera(folio, cCliente, cProf)VALUES(2, 2, 1);
+
+select estatus,correo from Cliente
+
+ALTER TABLE Cliente
+ADD CONSTRAINT UC_Cliente_correo UNIQUE (correo);
+
+ALTER TABLE Administrador
+ADD CONSTRAINT UC_Administrador_correo UNIQUE (correo);
+
+ALTER TABLE Profesionista
+ADD CONSTRAINT UC_Profesionista_correo UNIQUE (correo);

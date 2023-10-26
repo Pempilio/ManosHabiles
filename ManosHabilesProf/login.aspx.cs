@@ -19,10 +19,10 @@ namespace ManosHabilesProf
         {
             //Correo -> TextBox1
             //Passwrd -> TextBox2
-            String query = "select cProf,nombre,codigoPost from Profesionista where correo=? and passwrd=?";
-            String queryCliente = "select cCliente,nombre,codigoPost from Cliente where correo=? and passwrd=?";
+            String query = "select cProf,nombre,codigoPost,estatus from Profesionista where correo=? and passwrd=?";
+            String queryCliente = "select cCliente,nombre,codigoPost,estatus from Cliente where correo=? and passwrd=?";
             String nombre;
-            int clave, CP;
+            int clave, CP, estatus;
 
             OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando;
@@ -38,13 +38,20 @@ namespace ManosHabilesProf
                 clave = lector.GetInt32(0);
                 nombre = lector.GetString(1);
                 CP = lector.GetInt32(2);
+                estatus = lector.GetInt32(3);
 
-                Session.Timeout = 10;
-                Session.Add("cProf", clave);
-                Session.Add("nombre", nombre);
-                Session.Add("codigoPostal", CP);
-
-                Response.Redirect("HomeProfesionista.aspx");
+                if (estatus == 0)
+                {
+                    Session.Timeout = 10;
+                    Session.Add("cProf", clave);
+                    Session.Add("nombre", nombre);
+                    Session.Add("codigoPostal", CP);
+                    Response.Redirect("HomeProfesionista.aspx");
+                }
+                else
+                {
+                    Label1.Text = "Lo sentimos usted no puede usar su cuenta por motivos de ban";
+                }
             }
             else
             {
@@ -60,13 +67,19 @@ namespace ManosHabilesProf
                     clave = lector2.GetInt32(0);
                     nombre = lector2.GetString(1);
                     CP = lector2.GetInt32(2);
-
-                    Session.Timeout = 10;
-                    Session.Add("cCliente", clave);
-                    Session.Add("nombre", nombre);
-                    Session.Add("codigoPostal", CP);
-
-                    Response.Redirect("Cliente.aspx");
+                    estatus = lector2.GetInt32(3);
+                    if (estatus == 0)
+                    {
+                        Session.Timeout = 10;
+                        Session.Add("cCliente", clave);
+                        Session.Add("nombre", nombre);
+                        Session.Add("codigoPostal", CP);
+                        Response.Redirect("Cliente.aspx");
+                    }
+                    else
+                    {
+                        Label1.Text = "Lo sentimos usted no puede usar su cuenta por motivos de ban";
+                    }
                 }
                 else
                 {

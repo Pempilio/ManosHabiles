@@ -1,31 +1,33 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="ManosHabilesProf.login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginAdmin.aspx.cs" Inherits="ManosHabilesProf.WebForm1" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Inicio de sesión</title>
+    <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <h2>Inicio de sesión</h2>
+            Login Admin<br />
             <br />
-            Correo:<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Correo:
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
             <br />
             <br />
             Contraseña:
             <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
             <br />
             <br />
-            <a href="crearCuenta.aspx">¡Registrate aqui!</a>
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Entrar" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server"></asp:Label>
-            <br />
-            <br />
-            <asp:Button ID="Button1" runat="server" Text="Iniciar sesión" OnClick="Button1_Click" />
         </div>
     </form>
 </body>
