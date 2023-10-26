@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -12,7 +13,6 @@ namespace ManosHabilesProf
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
-        OdbcConnection conexion = new ConexionBD().con;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -95,7 +95,7 @@ namespace ManosHabilesProf
             // Definir la cadena de conexión y la consulta SQL
             string query = "UPDATE Cliente SET estatus = ? WHERE cCliente = ?";
 
-
+            OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando = new OdbcCommand(query, conexion);
 
             // Definir los parámetros del comando
@@ -116,11 +116,10 @@ namespace ManosHabilesProf
         {
             String query = "SELECT DISTINCT Cliente.cCliente,Cliente.nombre ,Cliente.apellido, Cliente.codigoPost, Cliente.correo, Cliente.passwrd, Cliente.fechaNaci, Cliente.descripcion, Reporte.folio, Reporte.descripcion AS descripcionReporte, Motivo.nombre AS nombreMotivo, Cliente.estatus FROM Cliente JOIN genera ON Cliente.cCliente = genera.cCliente JOIN Reporte ON genera.folio = Reporte.folio JOIN Motivo ON Reporte.cMotivo = Motivo.cMotivo;";
 
-
+            OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando = new OdbcCommand(query, conexion);
 
             // Abrir la conexión
-            conexion.Open();
 
             OdbcDataReader lector = comando.ExecuteReader();
             GridView1.DataSource = lector;
@@ -142,9 +141,17 @@ namespace ManosHabilesProf
             
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+       
+
+        protected void Button3_Click(object sender, EventArgs e)
         {
-            
+            Session.Abandon();
+            Response.Redirect("LoginAdmin.aspx");
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            OdbcConnection conexion = new ConexionBD().con;
             if (DropDownList1.SelectedValue == "-1" || DropDownList2.SelectedValue == "-1" || DropDownList3.SelectedValue == "-1")
             {
                 // Mostrar un error si alguna elección es "-1"
@@ -153,33 +160,35 @@ namespace ManosHabilesProf
                 return;
             }
 
-            if (DropDownList2.SelectedValue == "0")
+            if (DropDownList2.SelectedValue == "0") //0 es cliente
             {
-
                 StringBuilder queryBuilder = new StringBuilder();
-                queryBuilder.Append("SELECT DISTINCT Cliente.cCliente, Cliente.nombre, Cliente.apellido, Cliente.codigoPost, Cliente.correo, Cliente.fechaNaci, Cliente.descripcion, Reporte.folio, Reporte.descripcion AS descripcionReporte, Motivo.nombre AS nombreMotivo, Sexo.nombre AS NombreSexo, Cliente.estatus FROM Cliente JOIN genera ON Cliente.cCliente = genera.cCliente JOIN Reporte ON genera.folio = Reporte.folio JOIN Motivo ON Reporte.cMotivo = Motivo.cMotivo JOIN Sexo ON Cliente.cSexo = Sexo.cSexo WHERE Cliente.estatus = ?");
                 OdbcCommand comando = new OdbcCommand();
-                comando.Connection = conexion;
-
                 int valorBaneo = Convert.ToInt32(DropDownList1.SelectedValue);
-                comando.Parameters.AddWithValue("paramBaneo", valorBaneo);
+                comando.Connection = conexion;
+               
+                    queryBuilder.Append("SELECT DISTINCT Cliente.cCliente, Cliente.nombre, Cliente.apellido, Cliente.codigoPost, Cliente.correo, Cliente.fechaNaci, Cliente.descripcion, Reporte.folio, Reporte.descripcion AS descripcionReporte, Motivo.nombre AS nombreMotivo, Sexo.nombre AS NombreSexo, Cliente.estatus FROM Cliente JOIN genera ON Cliente.cCliente = genera.cCliente JOIN Reporte ON genera.folio = Reporte.folio JOIN Motivo ON Reporte.cMotivo = Motivo.cMotivo JOIN Sexo ON Cliente.cSexo = Sexo.cSexo WHERE Cliente.estatus = ?");
 
-                // Si ambas TextBox tienen un valor, se filtra por fecha del reporte
-                if (!string.IsNullOrWhiteSpace(TextBox1.Text) && !string.IsNullOrWhiteSpace(TextBox2.Text))
-                {
-                    queryBuilder.Append(" AND CAST(Reporte.fecha AS DATE) BETWEEN ? AND ?");
-                    DateTime fechaInicio = DateTime.Parse(TextBox1.Text).Date;
-                    DateTime fechaFin = DateTime.Parse(TextBox2.Text).Date;
-                    comando.Parameters.AddWithValue("fechaInicio", fechaInicio);
-                    comando.Parameters.AddWithValue("fechaFin", fechaFin);
-                }
+                    comando.Parameters.AddWithValue("paramBaneo", valorBaneo);
 
-                // Si el DropDownList3 tiene un valor diferente de 0, se filtra por motivo
-                if (DropDownList3.SelectedValue != "0")
-                {
-                    queryBuilder.Append(" AND Reporte.cMotivo = ?");
-                    comando.Parameters.AddWithValue("paramMotivo", DropDownList3.SelectedValue);
-                }
+                    // Si ambas TextBox tienen un valor, se filtra por fecha del reporte
+                    if (!string.IsNullOrWhiteSpace(TextBox1.Text) && !string.IsNullOrWhiteSpace(TextBox2.Text))
+                    {
+                        queryBuilder.Append(" AND CAST(Reporte.fecha AS DATE) BETWEEN ? AND ?");
+                        DateTime fechaInicio = DateTime.Parse(TextBox1.Text).Date;
+                        DateTime fechaFin = DateTime.Parse(TextBox2.Text).Date;
+                        comando.Parameters.AddWithValue("fechaInicio", fechaInicio);
+                        comando.Parameters.AddWithValue("fechaFin", fechaFin);
+                    }
+
+                    // Si el DropDownList3 tiene un valor diferente de 0, se filtra por motivo
+                    if (DropDownList3.SelectedValue != "0")
+                    {
+                        queryBuilder.Append(" AND Reporte.cMotivo = ?");
+                        comando.Parameters.AddWithValue("paramMotivo", DropDownList3.SelectedValue);
+                    }
+                
+               
 
                 comando.CommandText = queryBuilder.ToString();
 
@@ -195,31 +204,32 @@ namespace ManosHabilesProf
             }
             else
             {
-                StringBuilder queryBuilder = new StringBuilder();
-                queryBuilder.Append("SELECT DISTINCT Profesionista.cProf, Profesionista.nombre, Profesionista.apellido, Profesionista.codigoPost, Profesionista.correo, Profesionista.fechaNaci, Profesionista.anosExp, Profesionista.descripcion, Profesionista.estatus, Sexo.nombre AS NombreSexo , Reporte.folio, Reporte.descripcion AS descripcionReporte, Motivo.nombre AS nombreMotivo FROM Profesionista JOIN genera ON Profesionista.cProf = genera.cProf JOIN Reporte ON genera.folio = Reporte.folio JOIN Motivo ON Reporte.cMotivo = Motivo.cMotivo JOIN Sexo ON Profesionista.cSexo = Sexo.cSexo  WHERE Profesionista.estatus = ?");
-
+                int valorBaneo = Convert.ToInt32(DropDownList1.SelectedValue);
                 OdbcCommand comando = new OdbcCommand();
                 comando.Connection = conexion;
+                StringBuilder queryBuilder = new StringBuilder();
+              
+                    queryBuilder.Append("SELECT DISTINCT Profesionista.cProf, Profesionista.nombre, Profesionista.apellido, Profesionista.codigoPost, Profesionista.correo, Profesionista.fechaNaci, Profesionista.anosExp, Profesionista.descripcion, Profesionista.estatus, Sexo.nombre AS NombreSexo , Reporte.folio, Reporte.descripcion AS descripcionReporte, Motivo.nombre AS nombreMotivo FROM Profesionista JOIN genera ON Profesionista.cProf = genera.cProf JOIN Reporte ON genera.folio = Reporte.folio JOIN Motivo ON Reporte.cMotivo = Motivo.cMotivo JOIN Sexo ON Profesionista.cSexo = Sexo.cSexo  WHERE Profesionista.estatus = ?");
 
-                int valorBaneo = Convert.ToInt32(DropDownList1.SelectedValue);
-                comando.Parameters.AddWithValue("paramBaneo", valorBaneo);
+                    comando.Parameters.AddWithValue("paramBaneo", valorBaneo);
 
-                // Si ambas TextBox tienen un valor, se filtra por fecha del reporte
-                if (!string.IsNullOrWhiteSpace(TextBox1.Text) && !string.IsNullOrWhiteSpace(TextBox2.Text))
-                {
-                    queryBuilder.Append(" AND CAST(Reporte.fecha AS DATE) BETWEEN ? AND ?");
-                    DateTime fechaInicio = DateTime.Parse(TextBox1.Text).Date;
-                    DateTime fechaFin = DateTime.Parse(TextBox2.Text).Date;
-                    comando.Parameters.AddWithValue("fechaInicio", fechaInicio);
-                    comando.Parameters.AddWithValue("fechaFin", fechaFin);
-                }
+                    // Si ambas TextBox tienen un valor, se filtra por fecha del reporte
+                    if (!string.IsNullOrWhiteSpace(TextBox1.Text) && !string.IsNullOrWhiteSpace(TextBox2.Text))
+                    {
+                        queryBuilder.Append(" AND CAST(Reporte.fecha AS DATE) BETWEEN ? AND ?");
+                        DateTime fechaInicio = DateTime.Parse(TextBox1.Text).Date;
+                        DateTime fechaFin = DateTime.Parse(TextBox2.Text).Date;
+                        comando.Parameters.AddWithValue("fechaInicio", fechaInicio);
+                        comando.Parameters.AddWithValue("fechaFin", fechaFin);
+                    }
 
-                // Si el DropDownList3 tiene un valor diferente de 0, se filtra por motivo
-                if (DropDownList3.SelectedValue != "0")
-                {
-                    queryBuilder.Append(" AND Reporte.cMotivo = ?");
-                    comando.Parameters.AddWithValue("paramMotivo", DropDownList3.SelectedValue);
-                }
+                    // Si el DropDownList3 tiene un valor diferente de 0, se filtra por motivo
+                    if (DropDownList3.SelectedValue != "0")
+                    {
+                        queryBuilder.Append(" AND Reporte.cMotivo = ?");
+                        comando.Parameters.AddWithValue("paramMotivo", DropDownList3.SelectedValue);
+                    }
+                
 
                 comando.CommandText = queryBuilder.ToString();
 
@@ -232,18 +242,7 @@ namespace ManosHabilesProf
                 lector.Close();
                 conexion.Close();
 
-            } 
-
-        }
-
-        protected void Button3_Click(object sender, EventArgs e)
-        {
-            Session.Abandon();
-            Response.Redirect("LoginAdmin.aspx");
-        }
-
-        protected void Button4_Click(object sender, EventArgs e)
-        {
+            }
 
         }
     }

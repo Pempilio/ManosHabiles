@@ -34,9 +34,8 @@
             <br />
             <br />
             <br />
-            Generar Lista Para Banear:
-            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Generar" />
-            &nbsp;<asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Button" />
+            Generar Lista Para Banear:&nbsp;
+            <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Button" />
             <br />
             <br />
         </div>
