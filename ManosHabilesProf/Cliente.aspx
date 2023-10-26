@@ -8,33 +8,37 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
-         <div>
+    
+        <form id="form1" runat="server">
+        <div>
 
-             <h1>Profesionistas</h1>
-             <p>
-                 <asp:Button ID="Button3" runat="server" Text="Mis anuncios" />
-                 <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" />
-             </p>
+            <h1>Profesionistas</h1>
+            <p>
+                <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Mis anuncios" />
+                <asp:Button ID="Button4" runat="server" Text="Cerrar sesión" />
+            </p>
 
-             <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-             </asp:DropDownList>
-             <asp:DropDownList ID="DropDownList2" runat="server">
-                 <asp:ListItem Value="0">Sexo (sin preferencia)</asp:ListItem>
-                 <asp:ListItem Value="1">Masculino</asp:ListItem>
-                 <asp:ListItem Value="2">Femenino</asp:ListItem>
-             </asp:DropDownList>
-             <asp:DropDownList ID="DropDownList3" runat="server">
-             </asp:DropDownList>
-             <asp:Button ID="Button2" runat="server" Height="26px" OnClick="Button2_Click" Text="Buscar" />
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-             <asp:Button ID="Button1" runat="server" Text="Nuevo anuncio" OnClick="btn1"/>
-             <br />
-             <asp:GridView ID="GridView1" runat="server" Height="294px" Width="747px">
-             </asp:GridView>
-             <br />
+            <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+            </asp:DropDownList>
+            <asp:DropDownList ID="DropDownList2" runat="server">
+                <asp:ListItem Value="0">Sexo (sin preferencia)</asp:ListItem>
+                <asp:ListItem Value="1">Masculino</asp:ListItem>
+                <asp:ListItem Value="2">Femenino</asp:ListItem>
+            </asp:DropDownList>
+            <asp:DropDownList ID="DropDownList3" runat="server">
+            </asp:DropDownList>
+            <asp:Button ID="Button2" runat="server" Height="26px" OnClick="Button2_Click" Text="Buscar" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button1" runat="server" Text="Nuevo anuncio" OnClick="btn1"/>
+            <br />
+            <asp:GridView ID="GridView1" runat="server" Height="294px" Width="747px">
+            </asp:GridView>
+            <br />
 
-         </div>
+        </div>
     </form>
+  
+
+
 </body>
 </html>

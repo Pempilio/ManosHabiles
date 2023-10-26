@@ -9,20 +9,20 @@
 </head>
 <body>
     <form id="form1" runat="server">
-         <div>
-            <asp:Button ID="Button1" runat="server" Text="Regresar" />
+        <div>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Regresar" />
             <asp:Button ID="Button3" runat="server" Text="Cerrar sesión" />
             <br />
             <br />
             MIS ANUNCIOS:<br />
-            <asp:GridView ID="GridView1" runat="server" Height="322px" Width="579px">
+            <asp:GridView ID="GridView1" runat="server" Height="322px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="579px">
             </asp:GridView>
             <br />
             -Elimina un anuncio si así lo quieres-<br />
             Anuncio seleccionado:
             <asp:Label ID="Label1" runat="server"></asp:Label>
             <br />
-            <asp:Button ID="Button2" runat="server" Text="Eliminar" Width="104px" />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Eliminar" Width="104px" />
 &nbsp;<asp:Label ID="Label2" runat="server"></asp:Label>
             <br />
         </div>
