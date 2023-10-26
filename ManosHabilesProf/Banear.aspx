@@ -15,6 +15,7 @@
             <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Cerrar sesión" />
             <br />
             <br />
+            Si las personas no están baneadas se mostraran las personas que tienen algun reporte:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
             &nbsp;&nbsp; Filtar Por:&nbsp;&nbsp;
             <asp:DropDownList ID="DropDownList1" runat="server">
@@ -35,7 +36,7 @@
             <br />
             <br />
             Generar Lista Para Banear:&nbsp;
-            <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Button" />
+            <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Generar reporte" />
             <br />
             <br />
         </div>
