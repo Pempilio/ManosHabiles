@@ -19,9 +19,9 @@ namespace ManosHabilesProf
         {
             //Correo -> TextBox1
             //Passwrd -> TextBox2
-            String query = "select cProf,nombre from Profesionista where correo=? and passwrd=?";
+            String query = "select cProf,nombre,codigoPost from Profesionista where correo=? and passwrd=?";
             String nombre;
-            int clave;
+            int clave, CP;
 
             OdbcConnection conexion = new ConexionBD().con;
             OdbcCommand comando = new OdbcCommand(query, conexion);
@@ -34,14 +34,22 @@ namespace ManosHabilesProf
                 lector.Read();
                 clave = lector.GetInt32(0);
                 nombre = lector.GetString(1);
-                //Hola
+                CP = lector.GetInt32(2);
 
                 Session.Timeout = 10;
                 Session.Add("cProf", clave);
                 Session.Add("nombre", nombre);
+                Session.Add("codigoPostal", CP);
 
                 Response.Redirect("HomeProfesionista.aspx");
             }
+            else
+            {
+                Label1.Text = "Correo o contraseña incorrectos";
+                Session.Clear();
+                Session.Abandon();
+            }
+            lector.Close();
         }
     }
 }

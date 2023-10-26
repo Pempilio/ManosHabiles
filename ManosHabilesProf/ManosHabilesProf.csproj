@@ -67,12 +67,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Anuncio.aspx" />
+    <Content Include="Buzon.aspx" />
     <Content Include="crearCuenta.aspx" />
     <Content Include="HomeProfesionista.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="Perfil.aspx" />
+    <Content Include="StyleSheet1.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anuncio.aspx.cs">
+      <DependentUpon>Anuncio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Anuncio.aspx.designer.cs">
+      <DependentUpon>Anuncio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buzon.aspx.cs">
+      <DependentUpon>Buzon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Buzon.aspx.designer.cs">
+      <DependentUpon>Buzon.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConexionBD.cs" />
     <Compile Include="crearCuenta.aspx.cs">
       <DependentUpon>crearCuenta.aspx</DependentUpon>
@@ -94,6 +112,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
